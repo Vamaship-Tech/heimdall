@@ -4,7 +4,7 @@ function createRabbitMqConnection() {
     const user = process.env.RABBITMQ_USER || 'guest';
     const password = encodeURIComponent(process.env.RABBITMQ_PASSWORD || 'guest');
     const host = process.env.RABBITMQ_HOST || 'localhost';
-    var amqp_url = `amqp://${host}:5672`;
+    var amqp_url = `amqp://${user}:${password}@${host}:5672`;
     return  amqplib.connect(amqp_url, "heartbeat=60");
 }
 

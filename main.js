@@ -4,7 +4,7 @@ const ora = require("ora");
 const migrator = require("./utils/migrator");
 const chalk = require("chalk");
 const spinner = ora({
-  text: chalk.green("In brightest day, in blackest night, No evil shall escape Heimdall's sight"),
+  text: chalk.green("In the brightest day, and the blackest night, no evil shall escape Heimdall's sight"),
   color: "green",
   spinner: "dots2",
 });
