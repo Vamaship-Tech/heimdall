@@ -52,13 +52,13 @@ const program = async () => {
         table: e.table,
         rows,
       };
-      migrator.produce(JSON.stringify(obj), channel);
+      await migrator.produce(JSON.stringify(obj), channel);
       spinner.succeed("👽 _EVENT_ 👽");
       spinner.start();
     } catch (error) {
       console.log(chalk.red(error));
     } finally {
-      channel.close();
+      await channel.close();
     }
   };
 
