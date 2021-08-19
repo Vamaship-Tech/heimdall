@@ -4,7 +4,7 @@ const ora = require("ora");
 const migrator = require("./utils/migrator");
 const chalk = require("chalk");
 const spinner = ora({
-  text: chalk.green("In the brightest day, and the blackest night, no evil shall escape Heimdall's sight"),
+  text: chalk.green("In the brightest day, and the blackest night, No evil shall escape Heimdall's sight"),
   color: "green",
   spinner: "dots2",
 });
@@ -37,9 +37,9 @@ const program = async () => {
     "shipment_sku_images",
     "shipment_milestone_dates",
   ];
+  const channel = await amqpConnection.createChannel();
   const eventHandler = async (e) => {
     try {
-      const channel = await amqpConnection.createChannel();
       let rows = e.affectedRows;
       rows =
         e.type == "DELETE"
@@ -57,8 +57,6 @@ const program = async () => {
       spinner.start();
     } catch (error) {
       console.log(chalk.red(error));
-    } finally {
-      await channel.close();
     }
   };
 
