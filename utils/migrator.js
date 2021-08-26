@@ -8,16 +8,15 @@ function createRabbitMqConnection() {
     return  amqplib.connect(amqp_url, "heartbeat=60");
 }
 
-async function produce(message, channel) {
+async function produce(message, channel, queue) {
   var exch = "mongo_syncer";
-  var q = "shipments";
   var rkey = "";
 
   await channel
     .assertExchange(exch, "direct", { durable: true })
     .catch(console.error);
-  await channel.assertQueue(q, { durable: true });
-  await channel.bindQueue(q, exch, rkey);
+  await channel.assertQueue(queue, { durable: true });
+  await channel.bindQueue(queue, exch, rkey);
   channel.publish(exch, rkey, Buffer.from(message));
 }
 

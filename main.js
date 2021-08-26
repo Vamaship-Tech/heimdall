@@ -52,7 +52,7 @@ const program = async () => {
         table: e.table,
         rows,
       };
-      await migrator.produce(JSON.stringify(obj), channel);
+      await migrator.produce(JSON.stringify(obj), channel, obj.table);
       spinner.succeed("👽 _EVENT_ 👽");
       spinner.start();
     } catch (error) {
