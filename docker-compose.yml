@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  nodejs:
+    build:
+      context: .
+      dockerfile: docker-files/Dockerfile-nodejs
+    volumes:
+      - .:/usr/share/app
+    restart: always
+    depends_on:
+      - rabbitmq
+    networks:
+      - mongo_syncer
+    entrypoint: "./entrypoint.sh"
+  rabbitmq:
+    image: rabbitmq:3.9-alpine
+    networks:
+      - mongo_syncer
+    ports:
+      - 5672:5672
+networks:
+  mongo_syncer:
+    name: mongo_syncer

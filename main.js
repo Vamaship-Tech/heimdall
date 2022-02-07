@@ -11,7 +11,7 @@ const spinner = ora({
 
 const program = async () => {
   const connection = mysql.createConnection({
-    host: "localhost",
+    host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
   });
@@ -37,8 +37,8 @@ const program = async () => {
     "shipment_sku_images",
     "shipment_milestone_dates",
   ];
-  const channel = await amqpConnection.createChannel();
   const eventHandler = async (e) => {
+    const channel = await amqpConnection.createChannel();
     try {
       let rows = e.affectedRows;
       rows =
@@ -57,6 +57,8 @@ const program = async () => {
       spinner.start();
     } catch (error) {
       console.log(chalk.red(error));
+    } finally {
+      channel.close();
     }
   };
 

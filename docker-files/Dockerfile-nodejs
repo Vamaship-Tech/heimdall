@@ -1,0 +1,8 @@
+FROM node:14.15.5
+
+RUN apt update -y
+RUN mkdir -p /usr/share/app
+RUN apt install netcat -y
+COPY . /usr/share/app
+WORKDIR /usr/share/app
+RUN npm install --production
