@@ -31,10 +31,7 @@ const program = async () => {
     "shipment_addresses",
     "shipment_line_items",
     "shipment_packages",
-    "shipment_weight_histories",
-    "shipment_supplier_responses",
     "shipment_cost_breakups",
-    "shipment_sku_images",
     "shipment_milestone_dates",
   ];
   const eventHandler = async (e) => {
